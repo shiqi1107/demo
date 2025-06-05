@@ -413,27 +413,6 @@
       color: var(--accent);
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 60px 20px 30px;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      position: relative;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-      z-index: -1;
-    }
-
     /* Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-30px); }
@@ -882,13 +861,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Digital Interpretation of "Techgnosis" by Erik Davis | Designed with Modern Elegance</p>
-    <p>Exploring the intersection of technology, magic, and human consciousness</p>
-  </footer>
-
   <script>
     // Highlight effect for text
     document.querySelectorAll('.highlight').forEach(el => {
