@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Techgnosis: Magic, Memory, and the Angels of Information</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Orbitron 字体定义 */
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/orbitron-black.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/orbitron-bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/orbitron-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('fonts/orbitron-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    /* Georgia 字体定义 */
+    @font-face {
+      font-family: 'Georgia';
+      src: url('fonts/georgia.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Georgia';
+      src: url('fonts/georgiab.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Georgia';
+      src: url('fonts/georgiaz.ttf') format('truetype');
+      font-weight: normal;
+      font-style: italic;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #0b0c10;
+      --secondary: #1f2833;
+      --accent: #00ffff;
+      --accent-alt: #9c27b0;
+      --text: #e0e0e0;
+      --text-light: #b0b0b0;
+      --card-bg: rgba(31, 40, 51, 0.7);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--primary);
+      color: var(--text);
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 150, 200, 0.05) 0%, transparent 80%),
+        radial-gradient(circle at 80% 70%, rgba(120, 0, 200, 0.03) 0%, transparent 80%);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Header Styles */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(circle at center, #151627, var(--primary));
+      overflow: hidden;
+      padding: 0 20px;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(0, 200, 255, 0.1) 0%, transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(150, 0, 255, 0.08) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--accent);
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+      margin-bottom: 1.5rem;
+      animation: fadeInDown 1.2s ease-out forwards;
+      line-height: 1.2;
+    }
+
+    header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      color: var(--text-light);
+      animation: fadeInUp 1.4s ease-out forwards;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 30px;
+      right: 40px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 16px;
+      font-weight: 500;
+      background: rgba(31, 40, 51, 0.8);
+      border-radius: 8px;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 200, 255, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 500;
+    }
+
+    nav a i {
+      font-size: 0.8rem;
+    }
+
+    nav a:hover {
+      background: rgba(0, 200, 255, 0.15);
+      transform: translateX(-5px);
+    }
+
+    /* Section Styling */
+    section {
+      position: relative;
+      padding: 100px 10vw;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+      z-index: -1;
+    }
+
+    section h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 20px;
+    }
+
+    section h3::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    /* Content Blocks */
+    .content-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-content {
+      flex: 1;
+      min-width: 300px;
+      padding: 30px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+      font-family: 'Georgia', serif;
+    }
+
+    .text-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .visual-content {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      aspect-ratio: 16/9;
+      transition: var(--transition);
+    }
+
+    .visual-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .visual-content:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .visual-content:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Specific Sections */
+    #dream .text-content {
+      border-left: 5px solid var(--accent);
+    }
+
+    #crystal .text-content {
+      border-left: 5px solid #4dd0e1;
+    }
+
+    #pressure .text-content {
+      border-left: 5px solid #ff8a65;
+    }
+
+    #constructs .text-content {
+      border-left: 5px solid #f48fb1;
+    }
+
+    #hermetic .text-content {
+      border-left: 5px solid #b39ddb;
+    }
+
+    /* Blockquote */
+    blockquote {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2vw, 1.6rem);
+      color: var(--accent);
+      padding: 30px 40px;
+      border-left: 4px solid var(--accent-alt);
+      border-radius: 0 16px 16px 0;
+      background: var(--card-bg);
+      margin: 40px auto;
+      max-width: 900px;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    blockquote::before {
+      content: "";
+      font-size: 4rem;
+      position: absolute;
+      left: 10px;
+      top: -20px;
+      color: rgba(255, 255, 255, 0.1);
+      font-family: Georgia, serif;
+    }
+
+    /* Video Player */
+    .video-player {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 280px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+      transform-origin: bottom right;
+    }
+
+    .video-player:hover {
+      transform: scale(1.03);
+    }
+
+    .video-header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .video-header h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .video-header .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .video-header i {
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .video-header i:hover {
+      color: var(--accent);
+    }
+
+    .video-container {
+      width: 100%;
+      height: 160px;
+      background: #000;
+      position: relative;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Video Overlay */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .video-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .video-overlay i {
+      font-size: 2.5rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      padding: 15px;
+      transition: transform 0.3s;
+    }
+
+    .video-overlay:hover i {
+      transform: scale(1.1);
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 60px 20px 30px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      z-index: -1;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Text Animation Sections */
+    .text-animation-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .text-animation-container {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .animated-text {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .animated-text.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Specific animations */
+    .breathing-text {
+      animation: breathing 3s infinite alternate;
+      letter-spacing: 0.1em;
+    }
+
+    .blur-text {
+      filter: blur(8px);
+      animation: sharpen 2s forwards;
+    }
+
+    .drift-text {
+      animation: drift 10s infinite alternate ease-in-out;
+      opacity: 0.7;
+    }
+
+    .bounce-text span {
+      display: inline-block;
+      animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .color-change-text span {
+      display: inline-block;
+      opacity: 0;
+      animation: colorChange 0.8s forwards;
+    }
+
+    .scatter-text {
+      display: inline-block;
+      position: relative;
+    }
+
+    .scatter-text span {
+      display: inline-block;
+      position: relative;
+      animation: scatter 0.8s forwards;
+    }
+
+    .ascend-text {
+      animation: ascend 8s forwards;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    .illumination-text {
+      position: relative;
+      display: inline-block;
+    }
+
+    .illumination-text::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #fff, transparent 70%);
+      opacity: 0;
+      animation: flash 3s forwards;
+    }
+
+    .glow-text {
+      animation: glowPulse 4s infinite alternate;
+    }
+
+    /* Animation keyframes */
+    @keyframes breathing {
+      0% { letter-spacing: 0.1em; opacity: 0.8; }
+      100% { letter-spacing: 0.3em; opacity: 1; }
+    }
+
+    @keyframes sharpen {
+      0% { filter: blur(8px); opacity: 0.7; }
+      100% { filter: blur(0); opacity: 1; }
+    }
+
+    @keyframes drift {
+      0% { transform: translateX(-10px); }
+      100% { transform: translateX(10px); }
+    }
+
+    @keyframes bounce {
+      0% { opacity: 0; transform: translateY(30px); }
+      60% { transform: translateY(-10px); }
+      80% { transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes colorChange {
+      0% { opacity: 0; transform: translateY(20px); color: white; }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scatter {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-15px); }
+      40% { transform: translateX(10px); }
+      60% { transform: translateX(-5px); }
+      80% { transform: translateX(3px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes ascend {
+      0% { transform: translateY(0); letter-spacing: 0.05em; }
+      100% { transform: translateY(-100px); letter-spacing: 0.2em; opacity: 0.3; }
+    }
+
+    @keyframes flash {
+      0% { opacity: 0; }
+      30% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+      100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        top: 20px;
+        right: 20px;
+      }
+      
+      nav a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+      
+      section {
+        padding: 80px 5vw;
+      }
+      
+      .content-block {
+        flex-direction: column;
+      }
+      
+      .video-player {
+        width: 220px;
+        right: 15px;
+        bottom: 15px;
+      }
+      
+      .video-container {
+        height: 120px;
+      }
+      
+      .text-animation-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="#dream"><i class="fas fa-dream"></i> Digital Dream</a>
+    <a href="#crystal"><i class="fas fa-crystal"></i> Crystal Interface</a>
+    <a href="#pressure"><i class="fas fa-bolt"></i> Information Pressure</a>
+    <a href="#constructs"><i class="fas fa-cube"></i> Sci-Fi Constructs</a>
+    <a href="#hermetic"><i class="fas fa-magic"></i> Hermetic Memory</a>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <h1>Techgnosis: Magic, Memory, and the Angels of Information</h1>
+      <h2>by Erik Davis</h2>
+    </div>
+  </header>
+
+  <!-- Text Animation Sections -->
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #0a0b1a, #151a30);">
+    <div class="text-animation-container">
+      <div class="animated-text breathing-text" id="text1">
+        We begin with a digital dream...
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #151a30, #1a1f38);">
+    <div class="text-animation-container">
+      <div class="animated-text blur-text drift-text" id="text2">
+        ...these phantasms ghosting the interface.
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #1a1f38, #212840);">
+    <div class="text-animation-container">
+      <div class="animated-text bounce-text" id="text3">
+        <span>how</span>
+        <span>does</span>
+        <span>one</span>
+        <span>move</span>
+        <span>through</span>
+        <span>this</span>
+        <span>space?</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #212840, #2a3050);">
+    <div class="text-animation-container">
+      <div class="animated-text color-change-text" id="text4">
+        <span>mythologies,</span>
+        <span>metaphysics,</span>
+        <span>hints</span>
+        <span>of</span>
+        <span>arcane</span>
+        <span>magic.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #2a3050, #333b60);">
+    <div class="text-animation-container">
+      <div class="animated-text scatter-text" id="text5">
+        invoke a network of resonances.
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #333b60, #3d4670);">
+    <div class="text-animation-container">
+      <div class="animated-text ascend-text" id="text6">
+        "chips of Messianic time"
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #3d4670, #465180);">
+    <div class="text-animation-container">
+      <div class="animated-text illumination-text" id="text7">
+        the moment of mystical illumination.
+      </div>
+    </div>
+  </section>
+
+  <section class="text-animation-section" style="background: linear-gradient(to bottom, #465180, #505c90);">
+    <div class="text-animation-container">
+      <div class="animated-text glow-text" id="text8">
+        "If you embrace in thought all things at once... you will comprehend God."
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections -->
+  <section id="dream">
+    <h3>A Digital Dream</h3>
+    <div class="content-block">
+      <div class="text-content">
+        <p>
+          As computers, media and telecommunication technology continue to collect, manipulate, store, represent and transmit an ever-increasing flux of data, they are installing nothing less than a new dimension: the <span class="highlight">space of information</span>.
+        </p>
+        <p>
+          This multi-dimensional space is virtual, densely webbed, and infinitely complex — a realm accessed only through the mediation of our <span class="highlight">imaginative and technical representations</span>.
+        </p>
+        <p>
+          How powerfully we engage it depends on how powerfully we both <span class="highlight">manipulate</span> and <span class="highlight">inhabit</span> these ghost-like phantasms of the interface.
+        </p>
+      </div>
+      <div class="visual-content">
+        <img src="images/img01.jpg" alt="Digital network">
+      </div>
+    </div>
+  </section>
+
+  <section id="crystal">
+    <h3>Through the Liquid Crystal</h3>
+    <div class="content-block">
+      <div class="visual-content">
+        <img src="images/img02.jpg" alt="Interface metaphor">
+      </div>
+      <div class="text-content">
+        <p>
+          Things do not work the same through the <span class="highlight">liquid crystal looking-glass</span>, with its codes, hypertexts, simulated spaces, labyrinthine network architectures, baroque metaphors, and colossal encyclopedias of memory.
+        </p>
+        <p>
+          <span class="highlight">Information theory mutates into praxis</span>: how do we move through this space? What logics, cartographies, entities, connections emerge?
+        </p>
+        <p>
+          Interface designers are already grappling with the <span class="highlight">phantasmic apparatus of imagination</span> — a challenge for both dreaming and analytic minds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pressure">
+    <h3>Information Under Pressure</h3>
+    <div class="content-block">
+      <div class="text-content">
+        <p>
+          Far beyond Silicon Valley, phantasms hover over the <span class="highlight">technologically-mediated processing</span> that increasingly shapes our world.
+        </p>
+        <p>
+          The word <span class="highlight">"information" crackles with pressure</span> — drawing mythologies, metaphysics, even <span class="highlight">arcane magic</span> into its orbit.
+        </p>
+      </div>
+      <div class="visual-content">
+        <img src="images/img03.png" alt="Information pressure">
+      </div>
+    </div>
+  </section>
+
+  <section id="constructs">
+    <h3>Imaginative Constructs</h3>
+    <blockquote>
+      "Science fiction has already explored such mythologies of information..."
+    </blockquote>
+    <div class="content-block">
+      <div class="text-content">
+        <p>
+          The constructs that emerge — <span class="highlight">William Gibson's Cyberspace</span>, <span class="highlight">Vinge's Other Plane</span>, and <span class="highlight">Dick's VALIS</span> — are not just fiction.
+        </p>
+        <p>
+          They are <span class="highlight">mobile ideas</span>, circulating and evolving in our digital culture. Each serves as a kind of magical interface between imagination, language, and the technological unconscious.
+        </p>
+      </div>
+      <div class="visual-content">
+        <img src="images/img04.jpg" alt="Sci-fi constructs">
+      </div>
+    </div>
+  </section>
+
+  <section id="hermetic">
+    <h3>Hermetic Imagination</h3>
+    <blockquote>
+      "Magicians hoarded a stunning amount of information: ritual names, talismanic images, and gnostic symbols — all used to <span class="highlight">capture astral forces</span>."
+    </blockquote>
+    <div class="content-block">
+      <div class="text-content">
+        <p>
+          From <span class="highlight">trickster tales</span> to <span class="highlight">mystical conceptions of the Logos</span>, the hermetic imagination maps the obscure. Its methods include <span class="highlight">demonic cryptography</span>, the <span class="highlight">art of memory</span>, and <span class="highlight">gnostic cosmology</span>.
+        </p>
+        <p>
+          These practices were not metaphorical — they were techniques of <span class="highlight">knowledge control</span>, embedded in sigils, numbers, rituals, and sacred lists.
+        </p>
+      </div>
+      <div class="visual-content">
+        <img src="images/img05.jpg" alt="Hermetic symbols">
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Images -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 50px 10vw; max-width: 1400px; margin: 0 auto;">
+    <div class="visual-content">
+      <img src="images/img01.jpg" alt="Tech 1">
+    </div>
+    <div class="visual-content">
+      <img src="images/img02.jpg" alt="Tech 2">
+    </div>
+    <div class="visual-content">
+      <img src="images/img03.png" alt="Tech 3">
+    </div>
+    <div class="visual-content">
+      <img src="images/img04.jpg" alt="Tech 4">
+    </div>
+    <div class="visual-content">
+      <img src="images/img05.jpg" alt="Tech 5">
+    </div>
+    <div class="visual-content">
+      <img src="images/img06.jpg" alt="Tech 6">
+    </div>
+  </div>
+
+  <!-- Video Player -->
+  <div class="video-player">
+    <div class="video-header">
+      <h4>Techgnosis Explained</h4>
+      <div class="controls">
+        <i class="fas fa-expand"></i>
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <div class="video-container">
+      <video id="techVideo">
+        <source src="media/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay">
+        <i class="fas fa-play"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Digital Interpretation of "Techgnosis" by Erik Davis | Designed with Modern Elegance</p>
+    <p>Exploring the intersection of technology, magic, and human consciousness</p>
+  </footer>
+
+  <script>
+    // Highlight effect for text
+    document.querySelectorAll('.highlight').forEach(el => {
+      el.addEventListener('mouseover', function() {
+        this.style.color = '#00ffff';
+        this.style.textShadow = '0 0 8px rgba(0, 255, 255, 0.6)';
+      });
+      
+      el.addEventListener('mouseout', function() {
+        this.style.color = '';
+        this.style.textShadow = '';
+      });
+    });
+    
+    // Video controls
+    const videoPlayer = document.querySelector('.video-player');
+    const video = document.getElementById('techVideo');
+    const overlay = document.querySelector('.video-overlay');
+    const playBtn = overlay.querySelector('i');
+    const closeBtn = document.querySelector('.video-header .fa-times');
+    const expandBtn = document.querySelector('.video-header .fa-expand');
+    
+    // Play video when overlay is clicked
+    overlay.addEventListener('click', function() {
+      video.play();
+      this.classList.add('hidden');
+    });
+    
+    // Close video player
+    closeBtn.addEventListener('click', function() {
+      videoPlayer.style.display = 'none';
+      video.pause();
+    });
+    
+    // Expand video player
+    let isExpanded = false;
+    expandBtn.addEventListener('click', function() {
+      if (isExpanded) {
+        videoPlayer.style.width = '280px';
+        videoPlayer.style.bottom = '30px';
+        videoPlayer.style.right = '30px';
+        expandBtn.classList.remove('fa-compress');
+        expandBtn.classList.add('fa-expand');
+      } else {
+        videoPlayer.style.width = '500px';
+        videoPlayer.style.bottom = '50px';
+        videoPlayer.style.right = '50px';
+        expandBtn.classList.remove('fa-expand');
+        expandBtn.classList.add('fa-compress');
+      }
+      isExpanded = !isExpanded;
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Pause video when it ends
+    video.addEventListener('ended', function() {
+      overlay.classList.remove('hidden');
+    });
+    
+    // Text animations on scroll
+    const animatedTexts = document.querySelectorAll('.animated-text');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          
+          // Specific animations for each text
+          const id = entry.target.id;
+          
+          if (id === 'text3') {
+            // Word-by-word bounce animation
+            const words = entry.target.querySelectorAll('span');
+            words.forEach((word, index) => {
+              setTimeout(() => {
+                word.style.animation = `bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${index * 0.1}s`;
+                word.style.opacity = 1;
+              }, index * 200);
+            });
+          }
+          
+          if (id === 'text4') {
+            // Color change animation
+            const words = entry.target.querySelectorAll('span');
+            const colors = ['#fff', '#FFD700', '#9c27b0'];
+            
+            words.forEach((word, index) => {
+              setTimeout(() => {
+                word.style.animation = `colorChange 0.8s forwards`;
+                word.style.color = colors[index % colors.length];
+                word.style.opacity = 1;
+                word.style.textShadow = '0 0 10px rgba(255, 215, 0, 0.5)';
+              }, index * 300);
+            });
+          }
+          
+          if (id === 'text5') {
+            // Scatter animation
+            const letters = entry.target.textContent.split('');
+            entry.target.innerHTML = '';
+            
+            letters.forEach(letter => {
+              const span = document.createElement('span');
+              span.textContent = letter;
+              span.style.display = 'inline-block';
+              entry.target.appendChild(span);
+            });
+            
+            const spans = entry.target.querySelectorAll('span');
+            spans.forEach((span, index) => {
+              setTimeout(() => {
+                span.style.animation = `scatter 0.8s forwards ${index * 0.05}s`;
+              }, 200);
+            });
+          }
+          
+          if (id === 'text7') {
+            // Flash background
+            document.body.style.animation = 'flash 3s forwards';
+            setTimeout(() => {
+              document.body.style.animation = '';
+            }, 3000);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    animatedTexts.forEach(text => {
+      observer.observe(text);
+    });
+  </script>
+</body>
+</html>
